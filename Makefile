@@ -390,18 +390,6 @@ deepcopy-gen: ## Generate deepcopy golang code
 	@echo "+ $@"
 	operator-sdk generate k8s
 
-.PHONY: scheme-doc-gen
-HAS_GEN_CRD_API_REFERENCE_DOCS := $(shell ls gen-crd-api-reference-docs 2> /dev/null)
-scheme-doc-gen: ## Generate Jenkins CRD scheme doc
-	@echo "+ $@"
-ifndef HAS_GEN_CRD_API_REFERENCE_DOCS
-	@wget https://github.com/ahmetb/$(GEN_CRD_API)/releases/download/v0.1.2/$(GEN_CRD_API)_linux_amd64.tar.gz
-	@mkdir -p $(GEN_CRD_API)
-	@tar -C $(GEN_CRD_API) -zxf $(GEN_CRD_API)_linux_amd64.tar.gz
-	@rm $(GEN_CRD_API)_linux_amd64.tar.gz
-endif
-	$(GEN_CRD_API)/$(GEN_CRD_API) -config gen-crd-api-config.json -api-dir github.com/jenkinsci/kubernetes-operator/pkg/apis/jenkins/$(API_VERSION) -template-dir $(GEN_CRD_API)/template -out-file documentation/$(VERSION)/jenkins-$(API_VERSION)-scheme.md
-
 .PHONY: check-minikube
 check-minikube: ## Checks if KUBERNETES_PROVIDER is set to minikube
 	@echo "+ $@"
@@ -510,8 +498,26 @@ helm-deploy: helm-package
 	helm repo index chart/ --url https://raw.githubusercontent.com/jenkinsci/kubernetes-operator/master/chart/jenkins-operator/
 	cd chart/ && mv jenkins-operator-*.tgz jenkins-operator
 
-.PHONY: generate-docs
-generate-docs: ## Re-generate docs directory from the website directory
+.PHONY: eval-docs:
+eval-docs: ./website
+	HAS_GEN_CRD_API_REFERENCE_DOCS := $(shell ls gen-crd-api-reference-docs 2> /dev/null)
+	## Generate Jenkins CRD scheme doc
+		@echo "+ $@"
+	ifndef HAS_GEN_CRD_API_REFERENCE_DOCS
+		@wget https://github.com/ahmetb/$(GEN_CRD_API)/releases/download/v0.1.2/$(GEN_CRD_API)_linux_amd64.tar.gz
+		@mkdir -p $(GEN_CRD_API)
+		@tar -C $(GEN_CRD_API) -zxf $(GEN_CRD_API)_linux_amd64.tar.gz
+		@rm $(GEN_CRD_API)_linux_amd64.tar.gz
+	endif
+		$(GEN_CRD_API)/$(GEN_CRD_API) -config gen-crd-api-config.json -api-dir github.com/jenkinsci/kubernetes-operator/pkg/apis/jenkins/$(API_VERSION) -template-dir $(GEN_CRD_API)/template -out-file documentation/$(VERSION)/jenkins-$(API_VERSION)-scheme.md
+
+	## Re-generate docs directory from the website directory
 	@echo "+ $@"
 	rm -rf docs || echo "Cannot remove docs dir, ignoring"
 	hugo -s website -d ../docs
+
+	## Create a Pull Request with changed docs
+	@echo "+ $@"
+	git add docs
+	git commit -m "Auto generated docs after master branch push"
+	git push

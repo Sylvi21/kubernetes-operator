@@ -1,0 +1,28 @@
+name: Super-Linter
+
+# Run this workflow every time a new commit pushed to your repository
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  # Set the job key. The key is displayed as the job name
+  # when a job name is not provided
+  docs:
+    # Name the Job
+    name: check-docs-changes
+    # Set the type of machine to run on
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks out a copy of your repository on the ubuntu-latest machine
+      - name: Checkout code
+        uses: actions/checkout@master
+
+      # Runs makefile goal - checks changes to /website folder and generates docs
+      - name: Run Makefile goal
+        env:
+          DEFAULT_BRANCH: master
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: make eval-docs
