@@ -499,7 +499,10 @@ helm-deploy: helm-package
 	cd chart/ && mv jenkins-operator-*.tgz jenkins-operator
 
 .PHONY: eval-docs
-eval-docs: ./website
+eval-docs:
+	@echo "+ $@"
+    git diff --name-only HEAD~ | grep -v -E "^(docs|.github)
+
 	## Generate Jenkins CRD scheme doc
 	@echo "+ $@"
 	@wget https://github.com/ahmetb/$(GEN_CRD_API)/releases/download/v0.1.2/$(GEN_CRD_API)_linux_amd64.tar.gz
