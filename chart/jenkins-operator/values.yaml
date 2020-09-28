@@ -245,7 +245,3 @@ operator:
   # fullnameOverride overrides the deployment name
   fullnameOverride: ""
 
-  resources: {}
-  nodeSelector: {}
-  tolerations: []
-  affinity: {}
