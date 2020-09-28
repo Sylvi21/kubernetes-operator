@@ -87,7 +87,7 @@ doDownload() {
         url="$JENKINS_UC_EXPERIMENTAL/latest/${plugin}.hpi"
     elif [[ "$version" == incrementals* ]] ; then
         # Download from Incrementals repo: https://jenkins.io/blog/2018/05/15/incremental-deployment/
-        # Example URL: https://repo.jenkins-ci.org/incrementals/org/jenkins-ci/plugins/workflow/workflow-support/2.19-rc289.d09828a05a74/workflow-support-2.19-rc289.d09828a05a74.hpi
+        # Example URL: https://repo.jenkins-ci.org/incrementals/org/jenkins-ci/plugins/workflows/workflows-support/2.19-rc289.d09828a05a74/workflows-support-2.19-rc289.d09828a05a74.hpi
         local groupId incrementalsVersion
         arrIN=(${version//;/ })
         groupId=${arrIN[1]}

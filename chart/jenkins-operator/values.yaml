@@ -64,9 +64,9 @@ jenkins:
   # basePlugins:
   # - name: kubernetes
   #   version: 1.18.3
-  # - name: workflow-job
+  # - name: workflows-job
   #   version: "2.34"
-  # - name: workflow-aggregator
+  # - name: workflows-aggregator
   #   version: "2.6"
   # - name: git
   #   version: 3.12.0
@@ -79,9 +79,9 @@ jenkins:
   basePlugins:
     - name: kubernetes
       version: "1.25.2"
-    - name: workflow-job
+    - name: workflows-job
       version: "2.39"
-    - name: workflow-aggregator
+    - name: workflows-aggregator
       version: "2.6"
     - name: git
       version: "4.2.2"

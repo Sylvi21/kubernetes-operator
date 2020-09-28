@@ -212,8 +212,8 @@ import com.cloudbees.plugins.credentials.CredentialsScope;
 import com.cloudbees.plugins.credentials.domains.Domain;
 import com.cloudbees.plugins.credentials.SystemCredentialsProvider;
 import jenkins.model.JenkinsLocationConfiguration;
-import org.jenkinsci.plugins.workflow.job.WorkflowJob;
-import org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition;
+import org.jenkinsci.plugins.workflows.job.WorkflowJob;
+import org.jenkinsci.plugins.workflows.cps.CpsScmFlowDefinition;
 {{ if .GitHubPushTrigger }}
 import com.cloudbees.jenkins.GitHubPushTrigger;
 {{ end }}
