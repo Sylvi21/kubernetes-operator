@@ -498,7 +498,7 @@ helm-deploy: helm-package
 	helm repo index chart/ --url https://raw.githubusercontent.com/jenkinsci/kubernetes-operator/master/chart/jenkins-operator/
 	cd chart/ && mv jenkins-operator-*.tgz jenkins-operator
 
-.PHONY: eval-docs:
+.PHONY: eval-docs
 eval-docs: ./website
 	HAS_GEN_CRD_API_REFERENCE_DOCS := $(shell ls gen-crd-api-reference-docs 2> /dev/null)
 	## Generate Jenkins CRD scheme doc
