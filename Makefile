@@ -500,7 +500,7 @@ helm-deploy: helm-package
 
 .PHONY: eval-docs
 eval-docs: ./website
-	HAS_GEN_CRD_API_REFERENCE_DOCS := $(ls gen-crd-api-reference-docs 2> /dev/null)
+	HAS_GEN_CRD_API_REFERENCE_DOCS := $(shell ls gen-crd-api-reference-docs 2> /dev/null)
 	## Generate Jenkins CRD scheme doc
 		@echo "+ $@"
 	ifndef HAS_GEN_CRD_API_REFERENCE_DOCS
