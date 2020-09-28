@@ -121,9 +121,9 @@ spec:
       - script-security:1.59
       - ssh-credentials:1.16
       - structs:1.19
-      - workflow-api:2.34
-      - workflow-scm-step:2.7
-      - workflow-step-api:2.19
+      - workflows-api:2.34
+      - workflows-scm-step:2.7
+      - workflows-step-api:2.19
       job-dsl:1.74:
       - script-security:1.59
       - structs:1.19
@@ -141,7 +141,7 @@ spec:
       - plain-credentials:1.5
       - structs:1.19
       - variant:1.2
-      - workflow-step-api:2.19
+      - workflows-step-api:2.19
       workflow-aggregator:2.6:
       - ace-editor:1.1
       - apache-httpcomponents-client-4-api:4.5.5-3.0
@@ -152,7 +152,7 @@ spec:
       - credentials:2.1.19
       - display-url-api:2.3.1
       - docker-commons:1.15
-      - docker-workflow:1.18
+      - docker-workflows:1.18
       - durable-task:1.29
       - git-client:2.7.7
       - git-server:1.7
@@ -182,23 +182,23 @@ spec:
       - script-security:1.59
       - ssh-credentials:1.16
       - structs:1.19
-      - workflow-api:2.34
-      - workflow-basic-steps:2.16
-      - workflow-cps-global-lib:2.13
-      - workflow-cps:2.69
-      - workflow-durable-task-step:2.30
-      - workflow-job:2.32
-      - workflow-multibranch:2.21
-      - workflow-scm-step:2.7
-      - workflow-step-api:2.19
-      - workflow-support:3.3
+      - workflows-api:2.34
+      - workflows-basic-steps:2.16
+      - workflows-cps-global-lib:2.13
+      - workflows-cps:2.69
+      - workflows-durable-task-step:2.30
+      - workflows-job:2.32
+      - workflows-multibranch:2.21
+      - workflows-scm-step:2.7
+      - workflows-step-api:2.19
+      - workflows-support:3.3
       workflow-job:2.32:
       - scm-api:2.4.1
       - script-security:1.59
       - structs:1.19
-      - workflow-api:2.34
-      - workflow-step-api:2.19
-      - workflow-support:3.3
+      - workflows-api:2.34
+      - workflows-step-api:2.19
+      - workflows-support:3.3
     image: jenkins/jenkins:lts
     imagePullPolicy: Always
     livenessProbe:
@@ -214,7 +214,7 @@ spec:
     plugins:
       simple-theme-plugin:0.5.1: []
       slack:2.24:
-      - workflow-step-api:2.19
+      - workflows-step-api:2.19
       - credentials:2.1.19
       - display-url-api:2.3.1
       - junit:1.28
@@ -253,9 +253,9 @@ spec:
     basePlugins:
     - name: kubernetes
       version: 1.15.7
-    - name: workflow-job
+    - name: workflows-job
       version: "2.32"
-    - name: workflow-aggregator
+    - name: workflows-aggregator
       version: "2.6"
     - name: git
       version: 3.10.0

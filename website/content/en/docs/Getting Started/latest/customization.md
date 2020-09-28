@@ -52,9 +52,9 @@ spec:
     basePlugins:
     - name: kubernetes
       version: 1.18.3
-    - name: workflow-job
+    - name: workflows-job
       version: "2.34"
-    - name: workflow-aggregator
+    - name: workflows-aggregator
       version: "2.6"
     - name: git
       version: 3.12.0
