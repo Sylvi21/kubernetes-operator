@@ -46,6 +46,8 @@ jobs:
             ${{ runner.os }}-node-
 
       - run: |
+          npm install
+          npm build
           npm install -g postcss-cli
           npm install autoprefixer
           npm audit fix
