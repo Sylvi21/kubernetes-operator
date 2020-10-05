@@ -512,8 +512,6 @@ helm-deploy: helm-package
 
 .PHONY: generate-docs
 generate-docs: ## Re-generate docs directory from the website directory
-    if git diff --name-only HEAD~ | grep -v -E "^(docs|.github)"; then
-        @echo "+ $@"
-        rm -rf docs || echo "Cannot remove docs dir, ignoring"
-        hugo -s website -d ../docs
-	fi
+    @echo "+ $@"
+    rm -rf docs || echo "Cannot remove docs dir, ignoring"
+    hugo -s website -d ../docs

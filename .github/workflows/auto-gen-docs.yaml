@@ -37,11 +37,11 @@ jobs:
           node-version: '12.x'
 
       # Runs makefile goal - checks changes to /website folder and generates docs
-      if git diff --name-only HEAD~ | grep -v -E "^(website|.github)"
       - name: Run Makefile goal
         env:
           DEFAULT_BRANCH: master
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: ${{git diff --name-only HEAD~ | grep -v -E "^(docs|.github)"}}
         run: make generate-docs
 
       # Push our generated site to our gh-pages branch
