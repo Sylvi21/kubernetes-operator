@@ -42,10 +42,7 @@ jobs:
         env:
           DEFAULT_BRANCH: master
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          if git diff --name-only HEAD~ | grep -v -E "^(website|.github)"; then
-          make generate-docs
-          fi
+        run: make generate-docs
 
       # Push our generated site to our gh-pages branch
       - name: Create Pull Request
