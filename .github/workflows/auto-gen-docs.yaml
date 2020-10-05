@@ -24,7 +24,7 @@ jobs:
           fetch-depth: 0
 
       - name: Check differences
-        runs: |
+        run: |
           echo "are_changed=false" >> $GITHUB_ENV
           if git diff --name-only HEAD~ | grep -v -E "^(website|.github)"; then
           echo "are_changed=true" >> $GITHUB_ENV
