@@ -511,7 +511,7 @@ helm-deploy: helm-package
 	cd chart/ && mv jenkins-operator-*.tgz jenkins-operator
 
 .PHONY: generate-docs
-generate-docs:
-    @echo "+ $@"
-    rm -rf docs || echo "Cannot remove docs dir, ignoring"
-    hugo -s website -d ../docs
+generate-docs: ## Re-generate docs directory from the website directory
+	@echo "+ $@"
+	rm -rf docs || echo "Cannot remove docs dir, ignoring"
+	hugo -s website -d ../docs
