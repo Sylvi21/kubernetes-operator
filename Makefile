@@ -512,7 +512,6 @@ helm-deploy: helm-package
 
 .PHONY: generate-docs
 generate-docs: ## Re-generate docs directory from the website directory
-
-	@echo "+ $@"
-	rm -rf docs || echo "Cannot remove docs dir, ignoring"
-	hugo -s website -d ../docs
+    @echo "+ $@"
+    rm -rf docs || echo "Cannot remove docs dir, ignoring"
+    hugo -s website -d ../docs
