@@ -37,6 +37,14 @@ jobs:
         with:
           node-version: '12.x'
 
+      - name: Cache dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+            
       # Runs makefile goal - checks changes to /website folder and generates docs
       - name: Run Makefile goal
         env:
