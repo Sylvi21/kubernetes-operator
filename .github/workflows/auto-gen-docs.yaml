@@ -46,11 +46,10 @@ jobs:
             ${{ runner.os }}-node-
 
       - run: |
-          npm install
-          npm build
-          npm install -g postcss-cli
-          npm install autoprefixer
-          npm audit fix
+          sudo npm install
+          sudo npm build
+          sudo npm install -D --save autoprefixer
+          sudo npm install -D --save postcss-cli
 
       # Runs makefile goal - checks changes to /website folder and generates docs
       - name: Run Makefile goal
