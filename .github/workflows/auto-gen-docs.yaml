@@ -46,8 +46,9 @@ jobs:
             ${{ runner.os }}-node-
 
       - run: |
-          sudo npm install
-          sudo npm build
+          npm init
+          npm install
+          npm build
           sudo npm install -D --save autoprefixer
           sudo npm install -D --save postcss-cli
 
