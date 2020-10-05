@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           submodules: recursive  # Fetch the Docsy theme
-          fetch-depth: 0
+          fetch-depth: 1
 
       # Sets up the appropriate version of Hugo
       - name: Setup Hugo
@@ -46,6 +46,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - run: |
+          cd website
           npm init
           npm install
           npm build
