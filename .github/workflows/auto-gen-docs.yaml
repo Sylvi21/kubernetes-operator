@@ -1,4 +1,4 @@
-name: Super-Linter
+name: auto-generate-docs
 
 # Run this workflow every time a new commit pushed to your repository
 on:
@@ -23,32 +23,30 @@ jobs:
           submodules: recursive  # Fetch the Docsy theme
           fetch-depth: 0
 
+      # Sets up the appropriate version of Hugo
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: '0.62.2'
           extended: true
 
+      # Sets up node
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
 
-      - name: Cache dependencies
-        uses: actions/cache@v1
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/website/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-      - run: npm ci
-
       # Runs makefile goal - checks changes to /website folder and generates docs
+      if git diff --name-only HEAD~ | grep -v -E "^(website|.github)"
       - name: Run Makefile goal
         env:
           DEFAULT_BRANCH: master
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: make eval-docs
-        run: make eval-docs
-        run: make eval-docs
-        run: make eval-docs
+        run: make generate-docs
+
+      # Push our generated site to our gh-pages branch
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+          with:
+            commit-message: Auto-updated docs
+            publish_dir: ./public
