@@ -52,4 +52,3 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           commit-message: Auto-updated docs
-        if: ${{are_changed == true}}
