@@ -44,8 +44,9 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-        run: npm ci
-        
+
+      - run: npm ci
+
       # Runs makefile goal - checks changes to /website folder and generates docs
       - name: Run Makefile goal
         env:
