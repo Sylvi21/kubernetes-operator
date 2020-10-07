@@ -13,6 +13,10 @@ All container images can be found at [virtuslab/jenkins-operator](https://hub.do
 {{% /pageinfo %}}
 
 ## Requirements
+## Requirements
+## Requirements
+## Requirements
+## Requirements
  
 To run **Jenkins Operator**, you will need:
 
