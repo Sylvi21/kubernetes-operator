@@ -28,9 +28,9 @@ jobs:
         run: |
           if git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E "^website*"; then
             git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E "^website*"
-            echo "IS_CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E "^website*")"
+            echo "IS_CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E "^website*")" >> $GITHUB_ENV
           else
-            echo "IS_CHANGED=empty"
+            echo "IS_CHANGED=empty" >> $GITHUB_ENV
           fi
 
       # Sets up the appropriate version of Hugo
