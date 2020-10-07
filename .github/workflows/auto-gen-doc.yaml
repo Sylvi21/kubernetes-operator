@@ -48,16 +48,6 @@ jobs:
         with:
           node-version: '12.x'
 
-      # Caches dependencies
-      - name: Cache dependencies
-        if: env.IS_CHANGED != 'empty'
-        uses: actions/cache@v1
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
       # Installs dependencies required by docsy theme
       - name: Install docsy dependencies
         if: env.IS_CHANGED != 'empty'
