@@ -38,8 +38,8 @@
 
 
 
-<link rel="preload" href="/kubernetes-operator/scss/main.min.fd69987024ae657af26227407273d5b4d1046115af0e0182839a91bb3e30e830.css" as="style">
-<link href="/kubernetes-operator/scss/main.min.fd69987024ae657af26227407273d5b4d1046115af0e0182839a91bb3e30e830.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/kubernetes-operator/scss/main.min.6c58fba96b88d035ce071c346f084a9dc4dedee4e80eb3724fe530520541a4ec.css" as="style">
+<link href="/kubernetes-operator/scss/main.min.6c58fba96b88d035ce071c346f084a9dc4dedee4e80eb3724fe530520541a4ec.css" rel="stylesheet" integrity="">
 
 <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -844,6 +844,8 @@ make minikube-run</code></pre>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">make run <span style="color:#000">NAMESPACE</span><span style="color:#ce5c00;font-weight:bold">=</span>default <span style="color:#000">KUBECTL_CONTEXT</span><span style="color:#ce5c00;font-weight:bold">=</span>remote-k8s <span style="color:#000">EXTRA_ARGS</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">&#39;--kubeconfig ~/.kube/config&#39;</span></code></pre></div>
 <p>Once <strong>Jenkins Operator</strong> are up and running, apply Jenkins custom resource:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl --context remote-k8s --namespace default apply -f deploy/crds/jenkins_v1alpha2_jenkins_cr.yaml
+kubectl --context remote-k8s --namespace default get jenkins -o yaml
+kubectl --context remote-k8s --namespace default get po</code></pre></div><div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl --context remote-k8s --namespace default apply -f deploy/crds/jenkins_v1alpha2_jenkins_cr.yaml
 kubectl --context remote-k8s --namespace default get jenkins -o yaml
 kubectl --context remote-k8s --namespace default get po</code></pre></div>
 <h2 id="testing">Testing</h2>
