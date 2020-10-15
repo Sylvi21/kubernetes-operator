@@ -17,11 +17,13 @@ jobs:
         with:
           go-version: '^1.14.7' # The Go version to download (if necessary) and use.
 
+      - name: go-dep
+        run: make go-dependencies
+
       - name: imports
         uses: grandcolline/golang-github-actions@v1.1.0
         with:
-          run: imports errcheck lint shadow staticcheck sec
-          token: ${{ secrets.GITHUB_TOKEN }}
+          run: imports
 #
 #      - name: Backup PVC - e2e
 #        run: make -C backup/pvc/ docker-e2e UID=$(id -u) GID=$(id -g)
