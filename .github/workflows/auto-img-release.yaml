@@ -3,7 +3,7 @@ on:
   release:
     types: [created]
 jobs:
-  publish image:
+  publish-image:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
