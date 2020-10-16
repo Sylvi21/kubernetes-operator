@@ -12,6 +12,10 @@ jobs:
       MINIKUBE_WANTREPORTERRORPROMPT: false
       MINIKUBE_HOME: $HOME
       KUBECONFIG: $HOME/.kube/config
+      MINIKUBE_VERSION: 1.12.1
+      OPERATOR_SDK_VERSION: 0.17.0
+      MINIKUBE_KUBERNETES_VERSION: 1.17.4
+      HELM_VERSION: 3.3.1
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
