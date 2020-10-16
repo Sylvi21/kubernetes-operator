@@ -12,14 +12,6 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v2
 
-      - name: Prepare go environment
-        uses: actions/setup-go@v2
-        with:
-          go-version: '^1.14.7' # The Go version to download (if necessary) and use.
-
-      - name: go-dep
-        run: make go-dependencies
-
       - name: imports
         uses: grandcolline/golang-github-actions@v1.1.0
         with:
