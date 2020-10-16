@@ -7,6 +7,11 @@ jobs:
     name: Push Docker image to Docker Hub
     env:
       GO111MODULE: on
+      CHANGE_MINIKUBE_NONE_USER: true
+      MINIKUBE_WANTUPDATENOTIFICATION: false
+      MINIKUBE_WANTREPORTERRORPROMPT: false
+      MINIKUBE_HOME: $HOME
+      KUBECONFIG: $HOME/.kube/config
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
@@ -37,7 +42,7 @@ jobs:
           curl -Lo operator-sdk https://github.com/operator-framework/operator-sdk/releases/download/v$(OPERATOR_SDK_VERSION)/operator-sdk-v$(OPERATOR_SDK_VERSION)-x86_64-linux-gnu && chmod +x operator-sdk && sudo mv operator-sdk /usr/local/bin/
           curl -Lo helm.tar.gz https://get.helm.sh/helm-v$(HELM_VERSION)-linux-amd64.tar.gz && tar xzfv helm.tar.gz && sudo mv linux-amd64/helm /usr/local/bin/
           sudo mkdir -p $(HOME)/.kube $(HOME)/.minikube
-          touch $(KUBECONFIG)
+          touch $KUBECONFIG
           sudo minikube start --vm-driver=none --kubernetes-version=$(MINIKUBE_KUBERNETES_VERSION)
 
       - name: Jenkins Operator - e2e
