@@ -36,9 +36,10 @@ jobs:
 #          run: imports
       - name: unit-tests
         env:
-          packages: ${{ go list -f '{{.ImportPath}}/' ./... | grep -v vendor }}
-          packages_for_unit_tests: ${{ go list -f '{{.ImportPath}}/' ./... | grep -v vendor | grep -v e2e }}
+          packages: ${{ $(go list -f '{{.ImportPath}}/' ./... | grep -v vendor) }}
+          packages_for_unit_tests: ${{ $(go list -f '{{.ImportPath}}/' ./... | grep -v vendor | grep -v e2e) }}
         run: |
+
           go fmt env.packages
           go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.26.0
           golangci-lint run
