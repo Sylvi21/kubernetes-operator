@@ -50,7 +50,6 @@ jobs:
           sudo mkdir -p $HOME/.kube $HOME/.minikube
           sudo touch $KUBECONFIG
           sudo minikube start --vm-driver=none --kubernetes-version=$MINIKUBE_KUBERNETES_VERSION
-          sudo mv /home/runner/work/kubernetes-operator/kubernetes-operator/.kube /home/runner/work/kubernetes-operator/kubernetes-operator/.minikube $HOME
           sudo chown -R $USER $HOME/.kube $HOME/.minikube
 
       - name: Jenkins Operator Helm Chart - e2e
