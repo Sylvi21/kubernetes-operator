@@ -53,12 +53,14 @@ jobs:
           sudo touch $KUBECONFIG
           sudo minikube start --vm-driver=none --kubernetes-version=$MINIKUBE_KUBERNETES_VERSION
           sudo chown -R $USER $HOME/.kube $HOME/.minikube
+          
+      - name: Jenkins Operator - e2e
+        run: make build e2e
 
       - name: Jenkins Operator Helm Chart - e2e
         run: make e2e BUILDTAGS=Helm E2E_TEST_SELECTOR='^.*Helm.*$'
 
-      - name: Jenkins Operator - e2e
-        run: make build e2e
+
 
 
 #      - name: Push to Docker Hub
