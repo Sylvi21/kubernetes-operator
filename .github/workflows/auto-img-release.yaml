@@ -81,14 +81,15 @@ jobs:
           BUILD_TAG: 0.5.0
         run: |
           make container-runtime-build
-          echo $(CONTAINER_RUNTIME_COMMAND) tag $(DOCKER_REGISTRY):$(GITCOMMIT) $(DOCKER_ORGANIZATION)/$(DOCKER_REGISTRY):$(BUILD_TAG) $(CONTAINER_RUNTIME_EXTRA_ARGS)
-          echo "Container runtime command: $CONTAINER_RUNTIME_COMMAND"
-          echo "Docker registry: $DOCKER_REGISTRY"
-          echo "Gitcommit: $GITCOMMIT"
-          echo "Docker organization: $DOCKER_ORGANIZATION"
-          echo "Docker registry: $DOCKER_REGISTRY"
-          echo "Version tag: $VERSION_TAG"
-          echo "Container runtime extra args: $CONTAINER_RUNTIME_EXTRA_ARGS"
+          make container-runtime-push
+#          echo $(CONTAINER_RUNTIME_COMMAND) tag $(DOCKER_REGISTRY):$(GITCOMMIT) $(DOCKER_ORGANIZATION)/$(DOCKER_REGISTRY):$(BUILD_TAG) $(CONTAINER_RUNTIME_EXTRA_ARGS)
+#          echo "Container runtime command: $CONTAINER_RUNTIME_COMMAND"
+#          echo "Docker registry: $DOCKER_REGISTRY"
+#          echo "Gitcommit: $GITCOMMIT"
+#          echo "Docker organization: $DOCKER_ORGANIZATION"
+#          echo "Docker registry: $DOCKER_REGISTRY"
+#          echo "Version tag: $VERSION_TAG"
+#          echo "Container runtime extra args: $CONTAINER_RUNTIME_EXTRA_ARGS"
 
 #      - name: Push to Docker Hub
 #        uses: docker/build-push-action@v1
