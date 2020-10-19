@@ -36,6 +36,7 @@ jobs:
 #          run: imports
       - name: unit-tests
         run: |
+          go test -v ./...
           echo "packages=$(go list -f '{{.ImportPath}}/' ./... | grep -v vendor)" >> $GITHUB_ENV
           echo "packages_for_unit_tests=$(go list -f '{{.ImportPath}}/' ./... | grep -v vendor | grep -v e2e)" >> $GITHUB_ENV
           go fmt $packages
