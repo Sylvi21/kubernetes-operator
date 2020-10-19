@@ -34,6 +34,8 @@ jobs:
 #        uses: grandcolline/golang-github-actions@v1.1.0
 #        with:
 #          run: imports
+      - name: unit-tests
+        run: make verify
 
       - name: Backup PVC - e2e
         run: make -C backup/pvc/ docker-e2e UID=$(id -u) GID=$(id -g)
