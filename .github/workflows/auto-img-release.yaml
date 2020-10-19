@@ -35,7 +35,11 @@ jobs:
 #        with:
 #          run: imports
       - name: unit-tests
-        run: make verify
+        run: |
+          @echo "+ $@"
+          @go fmt $(PACKAGES)
+          go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.26.0
+          @golangci-lint run
 
       - name: Backup PVC - e2e
         run: make -C backup/pvc/ docker-e2e UID=$(id -u) GID=$(id -g)
