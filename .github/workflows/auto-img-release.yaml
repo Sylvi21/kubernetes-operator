@@ -52,7 +52,7 @@ jobs:
 #        run: make -C backup/pvc/ docker-e2e UID=$(id -u) GID=$(id -g)
 
       - name: Prepare environment for e2e
-        run: make travis-prepare
+        run: sudo make travis-prepare
 #          sudo apt-get update
 #          sudo apt-get install socat
 #          echo "https://storage.googleapis.com/kubernetes-release/release/v$MINIKUBE_KUBERNETES_VERSION/bin/linux/amd64/kubectl"
@@ -92,3 +92,11 @@ jobs:
           docker push $DOCKER_ORGANIZATION/$DOCKER_REGISTRY:$VERSION_TAG $CONTAINER_RUNTIME_EXTRA_ARGS
           docker tag $DOCKER_REGISTRY:$GITCOMMIT $DOCKER_ORGANIZATION/$DOCKER_REGISTRY:latest $CONTAINER_RUNTIME_EXTRA_ARGS
           docker push $DOCKER_ORGANIZATION/$DOCKER_REGISTRY:latest $CONTAINER_RUNTIME_EXTRA_ARGS
+
+
+# new login with new container registry url and PAT
+          echo ${{ secrets.CR_PAT }} | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
+# new container registry urls added
+          docker pull ghcr.io/github/octoshift:latest
+          docker build . --tag ghcr.io/github/octoshift:$GITHUB_SHA --cache-from ghcr.io/github/octoshift:latest
+          docker push ghcr.io/github/octoshift:$GITHUB_SHA
