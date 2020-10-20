@@ -487,7 +487,7 @@ travis-prepare:
 	curl -Lo helm.tar.gz https://get.helm.sh/helm-v$(HELM_VERSION)-linux-amd64.tar.gz && tar xzfv helm.tar.gz && sudo mv linux-amd64/helm /usr/local/bin/
 	mkdir -p $(HOME)/.kube $(HOME)/.minikube
 
-	touch $KUBECONFIG
+	touch ${KUBECONFIG}
 	sudo minikube start --vm-driver=none --kubernetes-version=$(MINIKUBE_KUBERNETES_VERSION)
 	sudo chown -R $(USER) $(HOME)/.kube $(HOME)/.minikube
 
