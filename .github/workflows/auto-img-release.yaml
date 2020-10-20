@@ -81,7 +81,7 @@ jobs:
           PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
           CONTAINER_RUNTIME_EXTRA_ARGS: ""
         run: |
-          $VERSION_TAG := $(cat VERSION.txt)
+          VERSION_TAG = $(cat VERSION.txt)
           docker build \
           --build-arg GO_VERSION=$GO_VERSION \
           --build-arg OPERATOR_SDK_VERSION=$OPERATOR_SDK_VERSION \
