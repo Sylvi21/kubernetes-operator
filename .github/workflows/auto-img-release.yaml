@@ -26,7 +26,7 @@ jobs:
       - name: Prepare go environment
         uses: actions/setup-go@v2
         with:
-          go-version: $GO_VERSION
+          go-version: ${{ GO_VERSION }}
 
       - name: go-dep
         run: make go-dependencies
