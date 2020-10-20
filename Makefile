@@ -498,7 +498,7 @@ else
 	mkdir -p $(HOME)/.kube $(HOME)/.minikube
 	touch KUBECONFIG
 	sudo minikube start --vm-driver=none --kubernetes-version=$(MINIKUBE_KUBERNETES_VERSION)
-	sudo chown -R USER $(HOME)/.kube $(HOME)/.minikube
+	sudo chown -R root $(HOME)/.kube $(HOME)/.minikube
 endif
 
 .PHONY: helm-package
