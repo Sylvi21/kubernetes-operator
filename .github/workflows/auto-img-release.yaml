@@ -77,13 +77,13 @@ jobs:
           DOCKER_ORGANIZATION: sylviab
           DOCKER_REGISTRY: cool-operator
 #          GITCOMMIT: ${{ github.sha }}
-          VERSION_TAG: ${{ cat VERSION.txt }}
-          GITCOMMIT: ${{ shell git rev-parse --short HEAD }}
+          GITCOMMIT: ${{ git rev-parse --short HEAD }}
           GITBRANCH: ${{ git rev-parse --abbrev-ref HEAD }}
           USERNAME: ${{ secrets.DOCKER_USERNAME }}
           PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
           CONTAINER_RUNTIME_EXTRA_ARGS: ""
         run: |
+          $VERSION_TAG := $(cat VERSION.txt)
           docker build \
           --build-arg GO_VERSION=$GO_VERSION \
           --build-arg OPERATOR_SDK_VERSION=$OPERATOR_SDK_VERSION \
