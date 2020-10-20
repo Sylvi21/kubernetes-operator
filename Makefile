@@ -486,7 +486,7 @@ travis-prepare:
 	curl -Lo operator-sdk https://github.com/operator-framework/operator-sdk/releases/download/v$(OPERATOR_SDK_VERSION)/operator-sdk-v$(OPERATOR_SDK_VERSION)-x86_64-linux-gnu && chmod +x operator-sdk && sudo mv operator-sdk /usr/local/bin/
 	curl -Lo helm.tar.gz https://get.helm.sh/helm-v$(HELM_VERSION)-linux-amd64.tar.gz && tar xzfv helm.tar.gz && sudo mv linux-amd64/helm /usr/local/bin/
 	mkdir -p $(HOME)/.kube $(HOME)/.minikube
-	touch $(KUBECONFIG)
+	sudo touch $(KUBECONFIG)
 	sudo minikube start --vm-driver=none --kubernetes-version=$(MINIKUBE_KUBERNETES_VERSION)
 	sudo chown -R $(USER) $(HOME)/.kube $(HOME)/.minikube
 
