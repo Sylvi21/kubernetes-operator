@@ -12,7 +12,7 @@ jobs:
       MINIKUBE_WANTREPORTERRORPROMPT: false
       MINIKUBE_HOME: /home/runner/work/kubernetes-operator/kubernetes-operator
       KUBECONFIG: /home/runner/work/kubernetes-operator/kubernetes-operator/.kube/config
-      GOVERSION: 1.14.7
+      GO_VERSION: 1.14.7
       MINIKUBE_VERSION: v1.12.1
       OPERATOR_SDK_VERSION: v0.17.0
       MINIKUBE_KUBERNETES_VERSION: v1.17.4
@@ -26,7 +26,7 @@ jobs:
       - name: Prepare go environment
         uses: actions/setup-go@v2
         with:
-          go-version: $GOVERSION
+          go-version: $GO_VERSION
 
       - name: go-dep
         run: make go-dependencies
