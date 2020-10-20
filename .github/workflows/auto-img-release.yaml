@@ -12,6 +12,7 @@ jobs:
       MINIKUBE_WANTREPORTERRORPROMPT: false
       MINIKUBE_HOME: /home/runner/work/kubernetes-operator/kubernetes-operator
       KUBECONFIG: /home/runner/work/kubernetes-operator/kubernetes-operator/.kube/config
+      GOVERSION: 1.14.7
       MINIKUBE_VERSION: v1.12.1
       OPERATOR_SDK_VERSION: v0.17.0
       MINIKUBE_KUBERNETES_VERSION: v1.17.4
@@ -25,7 +26,7 @@ jobs:
       - name: Prepare go environment
         uses: actions/setup-go@v2
         with:
-          go-version: '1.14.7' # The Go version to download (if necessary) and use.
+          go-version: env.GOVERSION
 
       - name: go-dep
         run: make go-dependencies
@@ -81,7 +82,7 @@ jobs:
           PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
           CONTAINER_RUNTIME_EXTRA_ARGS: ""
         run: |
-          VERSION_TAG = $(cat VERSION.txt)
+          $VERSION_TAG = $(cat VERSION.txt)
           docker build \
           --build-arg GO_VERSION=$GO_VERSION \
           --build-arg OPERATOR_SDK_VERSION=$OPERATOR_SDK_VERSION \
