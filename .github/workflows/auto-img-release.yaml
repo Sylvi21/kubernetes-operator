@@ -76,9 +76,7 @@ jobs:
         env:
           DOCKER_ORGANIZATION: sylviab
           DOCKER_REGISTRY: cool-operator
-#          GITCOMMIT: ${{ github.sha }}
-          GITCOMMIT: ${{ git rev-parse --short HEAD }}
-          GITBRANCH: ${{ git rev-parse --abbrev-ref HEAD }}
+          GITCOMMIT: ${{ github.sha }}
           USERNAME: ${{ secrets.DOCKER_USERNAME }}
           PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
           CONTAINER_RUNTIME_EXTRA_ARGS: ""
