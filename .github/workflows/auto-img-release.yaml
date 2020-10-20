@@ -82,12 +82,13 @@ jobs:
           GITBRANCH: ${{ git rev-parse --abbrev-ref HEAD }}
           USERNAME: ${{ secrets.DOCKER_USERNAME }}
           PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          CONTAINER_RUNTIME_EXTRA_ARGS: ""
         run: |
-           docker build \
-           --build-arg GO_VERSION=$GO_VERSION \
-           --build-arg OPERATOR_SDK_VERSION=$OPERATOR_SDK_VERSION \
-           -t $DOCKER_REGISTRY:$GITCOMMIT . \
-           --file build/Dockerfile $CONTAINER_RUNTIME_EXTRA_ARGS
+          docker build \
+          --build-arg GO_VERSION=$GO_VERSION \
+          --build-arg OPERATOR_SDK_VERSION=$OPERATOR_SDK_VERSION \
+          -t $DOCKER_REGISTRY:$GITCOMMIT . \
+          --file build/Dockerfile $CONTAINER_RUNTIME_EXTRA_ARGS
           docker tag $DOCKER_REGISTRY:$GITCOMMIT $DOCKER_ORGANIZATION/$DOCKER_REGISTRY:$VERSION_TAG $CONTAINER_RUNTIME_EXTRA_ARGS
           docker push $DOCKER_ORGANIZATION/$DOCKER_REGISTRY:$VERSION_TAG $CONTAINER_RUNTIME_EXTRA_ARGS
           docker tag $DOCKER_REGISTRY:$GITCOMMIT $DOCKER_ORGANIZATION/$DOCKER_REGISTRY:latest $CONTAINER_RUNTIME_EXTRA_ARGS
