@@ -32,9 +32,7 @@ jobs:
         run: make go-dependencies
 
       - name: Run build
-        run: |
-          ls
-          go build
+        run: make build
 
       - name: Run verify
         run: make verify
