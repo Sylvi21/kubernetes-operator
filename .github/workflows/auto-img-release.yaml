@@ -35,7 +35,9 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Vet
-        run: go vet
+        run: |
+          go mod tidy
+          go vet
 #      - name: go-dep
 #        run: make go-dependencies
 #
