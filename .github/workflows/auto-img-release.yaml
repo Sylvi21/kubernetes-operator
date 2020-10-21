@@ -36,10 +36,10 @@ jobs:
           go version
           go get -u golang.org/x/lint/golint
 
-      - name: Run build
-        run: go build
+#      - name: Run build
+#        run: go build
 
-      - name: Run vet & lint
+      - name: Run verify
         run: make verify
 #      - name: imports
 #        uses: grandcolline/golang-github-actions@v1.1.0
