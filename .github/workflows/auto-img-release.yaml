@@ -10,14 +10,11 @@ jobs:
       CHANGE_MINIKUBE_NONE_USER: true
       MINIKUBE_WANTUPDATENOTIFICATION: false
       MINIKUBE_WANTREPORTERRORPROMPT: false
-      MINIKUBE_HOME: /home/runner/work/kubernetes-operator/kubernetes-operator
-      KUBECONFIG: /home/runner/work/kubernetes-operator/kubernetes-operator/.kube/config
       GO_VERSION: 1.14.7
       MINIKUBE_VERSION: v1.12.1
       OPERATOR_SDK_VERSION: v0.17.0
       MINIKUBE_KUBERNETES_VERSION: v1.17.4
       HELM_VERSION: v3.3.1
-      HOME: /home/runner/work/kubernetes-operator/kubernetes-operator
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
@@ -29,13 +26,17 @@ jobs:
           go-version: ${{ env.GO_VERSION }}
 
       - name: go-dep
-        run: make go-dependencies
+        run: |
+          env
+          make go-dependencies
 
-      - name: Imports
-        uses: grandcolline/golang-github-actions@v1.1.0
-        with:
-          run: imports
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: verify
+        run: make verify
+#      - name: Imports
+#        uses: grandcolline/golang-github-actions@v1.1.0
+#        with:
+#          run: imports
+#          token: ${{ secrets.GITHUB_TOKEN }}
 
 #      - name: golangci-lint
 #        uses: golangci/golangci-lint-action@v2
@@ -64,18 +65,18 @@ jobs:
 #          sudo touch $KUBECONFIG
 #          sudo minikube start --vm-driver=none --kubernetes-version=$MINIKUBE_KUBERNETES_VERSION
 #          sudo chown -R $USER $HOME/.kube $HOME/.minikube
-
+#
 #      - name: Jenkins Operator - e2e
 #        run: make build e2e
 #
 #      - name: Jenkins Operator Helm Chart - e2e
 #        run: make e2e BUILDTAGS=Helm E2E_TEST_SELECTOR='^.*Helm.*$'
-
-      - name: Login to DockerHub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+#
+#      - name: Login to DockerHub
+#        uses: docker/login-action@v1
+#        with:
+#          username: ${{ secrets.DOCKERHUB_USERNAME }}
+#          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Release Container Runtime
         run: make container-runtime-release
