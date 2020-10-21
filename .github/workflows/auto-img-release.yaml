@@ -15,6 +15,7 @@ jobs:
       OPERATOR_SDK_VERSION: v0.17.0
       MINIKUBE_KUBERNETES_VERSION: v1.17.4
       HELM_VERSION: v3.3.1
+      GOPATH: /home/runner/go
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
