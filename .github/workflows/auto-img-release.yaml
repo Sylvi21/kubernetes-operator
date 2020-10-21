@@ -73,10 +73,17 @@ jobs:
       - name: Jenkins Operator Helm Chart - e2e
         run: make e2e BUILDTAGS=Helm E2E_TEST_SELECTOR='^.*Helm.*$'
 
-      - name: Release Docker Image
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Login to Dockerhub
         env:
           USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          PASSWORD: ${{ secrets.DOCKER_ACCESS_TOKEN }}
+
         run: make container-runtime-release
 #          ls -la
 #          docker build \
