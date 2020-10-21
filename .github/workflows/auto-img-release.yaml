@@ -32,7 +32,11 @@ jobs:
           ls -la
 
       - name: verify
-        run: make verify
+        run: |
+          env
+          ls -la $HOME
+          make verify
+
 #      - name: Imports
 #        uses: grandcolline/golang-github-actions@v1.1.0
 #        with:
