@@ -31,6 +31,11 @@ jobs:
       - name: go-dep
         run: make go-dependencies
 
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v2
+        with:
+          # Required: the version of golangci-lint is required and must be specified without patch version: we always use the latest patch version.
+          version: v1.29
 #      - name: Run build
 #        run: make build
 
@@ -53,9 +58,6 @@ jobs:
           sudo touch $KUBECONFIG
           sudo minikube start --vm-driver=none --kubernetes-version=$MINIKUBE_KUBERNETES_VERSION
           sudo chown -R $USER $HOME/.kube $HOME/.minikube
-
-      - name: Run verify
-        run: make verify
 
 #      - name: Jenkins Operator - e2e
 #        run: make build e2e
