@@ -41,7 +41,7 @@ jobs:
           sudo minikube start --vm-driver=none --kubernetes-version=$MINIKUBE_KUBERNETES_VERSION
           sudo chown -R $USER $HOME/.kube $HOME/.minikube
 
-      - fixie:
+      - name: fixie
         run: |
           make build
           make tidy
