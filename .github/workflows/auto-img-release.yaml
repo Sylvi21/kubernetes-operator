@@ -10,14 +10,14 @@ jobs:
       CHANGE_MINIKUBE_NONE_USER: true
       MINIKUBE_WANTUPDATENOTIFICATION: false
       MINIKUBE_WANTREPORTERRORPROMPT: false
-      MINIKUBE_HOME: /home/runner/work/kubernetes-operator/kubernetes-operator
-      KUBECONFIG: /home/runner/work/kubernetes-operator/kubernetes-operator/.kube/config
+      MINIKUBE_HOME: /home/runner/work/kubernetes-operator
+      KUBECONFIG: /home/runner/work/kubernetes-operator/.kube/config
       GO_VERSION: 1.14.7
       MINIKUBE_VERSION: v1.12.1
       OPERATOR_SDK_VERSION: v0.17.0
       MINIKUBE_KUBERNETES_VERSION: v1.17.4
       HELM_VERSION: v3.3.1
-      HOME: /home/runner/work/kubernetes-operator/kubernetes-operator
+      HOME: /home/runner/work/kubernetes-operator
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
