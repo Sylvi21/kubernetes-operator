@@ -44,7 +44,7 @@ jobs:
       - name: fixie
         run: |
           make build
-          make tidy
+          go mod tidy
 
       - name: Imports
         uses: grandcolline/golang-github-actions@v1.1.0
