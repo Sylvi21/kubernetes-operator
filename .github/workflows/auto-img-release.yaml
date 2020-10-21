@@ -31,8 +31,8 @@ jobs:
       - name: go-dep
         run: make go-dependencies
 
-      - name: Run build
-        run: make build
+#      - name: Run build
+#        run: make build
 
       - name: Run verify
         run: make verify
