@@ -28,14 +28,19 @@ jobs:
         with:
           go-version: ${{ env.GO_VERSION }}
 
-      - name: go-dep
-        run: make go-dependencies
-
-      - name: golangci-lint
-        uses: golangci/golangci-lint-action@v2
+      - name: check
+        uses: grandcolline/golang-github-actions@v1.1.0
         with:
-          # Required: the version of golangci-lint is required and must be specified without patch version: we always use the latest patch version.
-          version: v1.29
+          run: imports
+          token: ${{ secrets.GITHUB_TOKEN }}
+#      - name: go-dep
+#        run: make go-dependencies
+#
+#      - name: golangci-lint
+#        uses: golangci/golangci-lint-action@v2
+#        with:
+#          # Required: the version of golangci-lint is required and must be specified without patch version: we always use the latest patch version.
+#          version: v1.2
 #      - name: Run build
 #        run: make build
 
