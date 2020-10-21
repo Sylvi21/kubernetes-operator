@@ -77,21 +77,6 @@ jobs:
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Login to Dockerhub
-        env:
-          USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          PASSWORD: ${{ secrets.DOCKER_ACCESS_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
 
         run: make container-runtime-release
-#          ls -la
-#          docker build \
-#          --build-arg GO_VERSION=$GO_VERSION \
-#          --build-arg OPERATOR_SDK_VERSION=$OPERATOR_SDK_VERSION \
-#          -t $DOCKER_REGISTRY:$GITCOMMIT . \
-#          --file build/Dockerfile $CONTAINER_RUNTIME_EXTRA_ARGS
-#          docker tag $DOCKER_REGISTRY:$GITCOMMIT $DOCKER_ORGANIZATION/$DOCKER_REGISTRY:$VERSION_TAG $CONTAINER_RUNTIME_EXTRA_ARGS
-#          docker push $DOCKER_ORGANIZATION/$DOCKER_REGISTRY:$VERSION_TAG $CONTAINER_RUNTIME_EXTRA_ARGS
-#          docker tag $DOCKER_REGISTRY:$GITCOMMIT $DOCKER_ORGANIZATION/$DOCKER_REGISTRY:latest $CONTAINER_RUNTIME_EXTRA_ARGS
-#          docker push $DOCKER_ORGANIZATION/$DOCKER_REGISTRY:latest $CONTAINER_RUNTIME_EXTRA_ARGS
