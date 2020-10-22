@@ -40,6 +40,8 @@ jobs:
 
       - name: Prepare environment for e2e
         run: |
+          ls -la
+          env
           sudo apt-get update
           sudo apt-get install socat
           curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/$MINIKUBE_KUBERNETES_VERSION/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
