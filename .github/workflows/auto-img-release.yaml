@@ -38,51 +38,30 @@ jobs:
           ls -la $HOME
           make verify
 
-#      - name: Imports
-#        uses: grandcolline/golang-github-actions@v1.1.0
-#        with:
-#          run: imports
-#          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Prepare environment for e2e
+        run: |
+          sudo apt-get update
+          sudo apt-get install socat
+          curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/$MINIKUBE_KUBERNETES_VERSION/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
+          curl -Lo minikube https://storage.googleapis.com/minikube/releases/$MINIKUBE_VERSION/minikube-linux-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
+          curl -Lo operator-sdk https://github.com/operator-framework/operator-sdk/releases/download/$OPERATOR_SDK_VERSION/operator-sdk-$OPERATOR_SDK_VERSION-x86_64-linux-gnu && chmod +x operator-sdk && sudo mv operator-sdk /usr/local/bin/
+          curl -Lo helm.tar.gz https://get.helm.sh/helm-$HELM_VERSION-linux-amd64.tar.gz && tar xzfv helm.tar.gz && sudo mv linux-amd64/helm /usr/local/bin/
+          sudo mkdir -p $HOME/.kube $HOME/.minikube
+          sudo touch $KUBECONFIG
+          sudo minikube start --vm-driver=none --kubernetes-version=$MINIKUBE_KUBERNETES_VERSION
+          sudo chown -R $USER $HOME/.kube $HOME/.minikube
 
-#      - name: golangci-lint
-#        uses: golangci/golangci-lint-action@v2
-#        with:
-#          # Required: the version of golangci-lint is required and must be specified without patch version: we always use the latest patch version.
-#          version: v1.2
-#      - name: Run build
-#        run: make build
+      - name: Jenkins Operator - e2e
+        run: make build e2e
 
-#      - name: imports
-#        uses: grandcolline/golang-github-actions@v1.1.q0
-#        with:
-#          run: imports
-#          token: ${{ secrets.GITHUB_TOKEN }}
-#          directory: ./
+      - name: Jenkins Operator Helm Chart - e2e
+        run: make e2e BUILDTAGS=Helm E2E_TEST_SELECTOR='^.*Helm.*$'
 
-#      - name: Prepare environment for e2e
-#        run: |
-#          sudo apt-get update
-#          sudo apt-get install socat
-#          curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/$MINIKUBE_KUBERNETES_VERSION/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
-#          curl -Lo minikube https://storage.googleapis.com/minikube/releases/$MINIKUBE_VERSION/minikube-linux-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
-#          curl -Lo operator-sdk https://github.com/operator-framework/operator-sdk/releases/download/$OPERATOR_SDK_VERSION/operator-sdk-$OPERATOR_SDK_VERSION-x86_64-linux-gnu && chmod +x operator-sdk && sudo mv operator-sdk /usr/local/bin/
-#          curl -Lo helm.tar.gz https://get.helm.sh/helm-$HELM_VERSION-linux-amd64.tar.gz && tar xzfv helm.tar.gz && sudo mv linux-amd64/helm /usr/local/bin/
-#          sudo mkdir -p $HOME/.kube $HOME/.minikube
-#          sudo touch $KUBECONFIG
-#          sudo minikube start --vm-driver=none --kubernetes-version=$MINIKUBE_KUBERNETES_VERSION
-#          sudo chown -R $USER $HOME/.kube $HOME/.minikube
-#
-#      - name: Jenkins Operator - e2e
-#        run: make build e2e
-#
-#      - name: Jenkins Operator Helm Chart - e2e
-#        run: make e2e BUILDTAGS=Helm E2E_TEST_SELECTOR='^.*Helm.*$'
-#
-#      - name: Login to DockerHub
-#        uses: docker/login-action@v1
-#        with:
-#          username: ${{ secrets.DOCKERHUB_USERNAME }}
-#          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Release Container Runtime
         run: make container-runtime-release
