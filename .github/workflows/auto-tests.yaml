@@ -6,6 +6,7 @@ on:
 jobs:
   run-tests:
     name: Run automated tests
+    if: github.event_name == 'pull_request' && github.event.pull_request.merged == false
     env:
       GO111MODULE: on
       CHANGE_MINIKUBE_NONE_USER: true
