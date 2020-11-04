@@ -49,11 +49,11 @@ jobs:
 #      - name: Jenkins Operator Helm Chart - e2e
 #        run: make e2e BUILDTAGS=Helm E2E_TEST_SELECTOR='^.*Helm.*$'
 
-      - run: echo "This is fancy a comment" > output/results.txt
+      - run: echo "This is fancy a comment" > results.txt
       - uses: actions/upload-artifact@v1
         with:
           name: results
-          path: output
+          path: .
       - uses: actions/download-artifact@v1
         with:
           name: results
