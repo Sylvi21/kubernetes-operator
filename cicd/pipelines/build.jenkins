@@ -28,7 +28,7 @@ podTemplate(label: label,
 
             stage('Dep') {
                 container('go') {
-                    sh 'make dep'
+                    echo 'hello from Dep'
                 }
             }
 
