@@ -2,7 +2,7 @@ name: Run tests
 on: [push, pull_request]
 jobs:
   run-tests:
-    name: Run automated tests
+#    name: Run automated tests
     env:
       GO111MODULE: on
       CHANGE_MINIKUBE_NONE_USER: true
@@ -14,6 +14,8 @@ jobs:
       MINIKUBE_KUBERNETES_VERSION: v1.17.4
       HELM_VERSION: v3.3.1
       GOPATH: /home/runner/go
+      APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
+      APPLITOOLS_BATCH_ID: ${{ github.sha }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
@@ -49,18 +51,29 @@ jobs:
 #      - name: Jenkins Operator Helm Chart - e2e
 #        run: make e2e BUILDTAGS=Helm E2E_TEST_SELECTOR='^.*Helm.*$'
 
-      - run: echo "This is fancy a comment" > results.txt
-      - uses: actions/upload-artifact@v1
-        with:
-          name: results
-          path: .
-      - uses: actions/download-artifact@v1
-        with:
-          name: results
 
-      - name: comment PR
-        uses: machine-learning-apps/pr-comment@master
+      - name: Create success comment
+        if:  steps.check.outputs.triggered == 'true' &&  success() && github.event_name == 'push'
         env:
+          URL: ${{ github.event.issue.comments_url }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          path: results/results.txt
+        run: |
+          curl \
+            -X POST \
+            $URL \
+            -H "Content-Type: application/json" \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            --data '{ "body": " [All tests passed.]( https://github.com/'"$GITHUB_REPOSITORY"'/actions/runs/'"$GITHUB_RUN_ID"')" }'
+
+      - name: Create fail comment
+        if:  steps.check.outputs.triggered == 'true' && failure() && github.event_name == 'push'
+        env:
+          URL: ${{ github.event.issue.comments_url }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          curl \
+            -X POST \
+            $URL \
+            -H "Content-Type: application/json" \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            --data '{ "body": ":facepalm: [Tests failed.]( https://github.com/'"$GITHUB_REPOSITORY"'/actions/runs/'"$GITHUB_RUN_ID"')" }'
