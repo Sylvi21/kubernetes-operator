@@ -53,7 +53,7 @@ jobs:
 
 
       - name: Create success comment
-        if:  steps.check.outputs.triggered == 'true' &&  success() && github.event_name == 'push'
+        if:  steps.check.outputs.triggered == 'true' &&  ${{ success() }} && ${{ github.event_name == 'push' }}
         env:
           URL: ${{ github.event.issue.comments_url }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -66,7 +66,7 @@ jobs:
             --data '{ "body": " [All tests passed.]( https://github.com/'"$GITHUB_REPOSITORY"'/actions/runs/'"$GITHUB_RUN_ID"')" }'
 
       - name: Create fail comment
-        if:  steps.check.outputs.triggered == 'true' && failure() && github.event_name == 'push'
+        if:  steps.check.outputs.triggered == 'true' && ${{ failure() }} && ${{ github.event_name == 'push' }}
         env:
           URL: ${{ github.event.issue.comments_url }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
