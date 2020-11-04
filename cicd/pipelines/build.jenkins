@@ -40,7 +40,7 @@ podTemplate(label: label,
 
             stage('Build') {
                 container('go') {
-                    sh 'echo hello from build'
+                    sh 'hello from build'
                 }
             }
         }
